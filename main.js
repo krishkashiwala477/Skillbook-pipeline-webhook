@@ -3,7 +3,7 @@ import AWS from "./aws-config.js";
 const app = express();
 
 const codepipeline = new AWS.CodePipeline();
-app.use("/pipelines", async (req, res) => {
+app.post("/pipelines", async (req, res) => {
   //top
 
   async function triggerPipeline(pipelineName) {
