@@ -1,13 +1,15 @@
 import express from "express";
 import AWS from "./aws-config.js";
+import dotenv from "dotenv";
 const app = express();
 
 const codepipeline = new AWS.CodePipeline();
 
+dotenv.config();
 //development
 app.post("/development", async (req, res) => {
   const params = {
-    name: "skillc-frontend",
+    name: process.env.dev_pipe,
   };
 
   try {
@@ -18,7 +20,9 @@ app.post("/development", async (req, res) => {
       `Pipeline execution started successfully for ${params.name}:`,
       response
     );
-    res.send("Webhook received and both pipelines triggered successfully.");
+    res.send(
+      `Webhook received and  ${params.name} pipeline triggered successfully.`
+    );
   } catch (error) {
     console.error(
       `Error starting pipeline execution for ${params.name}:`,
@@ -33,7 +37,7 @@ app.post("/development", async (req, res) => {
 //production
 app.post("/production", async (req, res) => {
   const params = {
-    name: "skillac_frontend-production",
+    name: process.env.prod_pipe,
   };
 
   try {
@@ -44,7 +48,9 @@ app.post("/production", async (req, res) => {
       `Pipeline execution started successfully for ${params.name}:`,
       response
     );
-    res.send("Webhook received and both pipelines triggered successfully.");
+    res.send(
+      `Webhook received and  ${params.name} pipeline triggered successfully.`
+    );
   } catch (error) {
     console.error(
       `Error starting pipeline execution for ${params.name}:`,

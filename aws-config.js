@@ -1,10 +1,15 @@
 // aws-config.js
 import AWS from "aws-sdk";
 
+import dotenv from "dotenv";
+
+// Load environment variables from .env file
+dotenv.config();
+
 AWS.config.update({
-  accessKeyId: "AKIA4B2RSLGMP7QG3GXO",
-  secretAccessKey: "BJs7idgF7BRl9s4xFEIGDd4pxlHqv8VFPagOG/K3",
-  region: "us-east-1", // Change to your desired AWS region
+  accessKeyId: process.env.accessKeyId,
+  secretAccessKey: process.env.secretAccessKey,
+  region: process.env.region,
 });
 
 export default AWS;
